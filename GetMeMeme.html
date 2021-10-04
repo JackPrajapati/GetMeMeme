@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetMeMeme</title>
+    <style>
+        .memeImage{max-height: 50%;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body style="height: 100%;">
+    <div>
+        <button onClick="window.location.reload();">Next</button>
+    </div>
+    <p id="memeTitle"></p>
+    <img class="memeImage" id="memeImg" src="" alt="" height="500">
+</body>
+<script>
+    url = ""
+    function setData(params) {
+        $("#memeImg").attr('src', params['url'])
+        $("#memeImg").attr('alt', params['url'])
+        $("#memeTitle").text("Title: " + params['title'])
+    };
+    $.ajax({
+            url: 'https://meme-api.herokuapp.com/gimme',
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                setData(data)
+            },
+            error: function (error) {
+                console.log(`Error ${error}`);
+            }
+        });
+</script>
+</html>
